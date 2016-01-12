@@ -19,8 +19,7 @@ ui_print(" ");
 ui_print("Mounting system ...");
 ui_print(" ");
 
-ifelse(is_mounted("/system"), unmount("/system"));
-mount("ext4", "EMMC", "/dev/block/by-name/system", "/system", "");
+run_program("/sbin/busybox", "mount", "/system");
 
 ui_print(" ");
 ui_print("Flashing up XOSPApps ...");
