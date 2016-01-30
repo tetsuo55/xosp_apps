@@ -16,6 +16,16 @@ ui_print() {
   echo -n -e "ui_print\n" > /proc/self/fd/$OUTFD
 }
 
+grep_prop() {
+  REGEX="s/^$1=//p"
+  shift
+  FILES=$@
+  if [ -z "$FILES" ]; then
+    FILES='/system/build.prop'
+  fi
+  cat $FILES 2>/dev/null | sed -n $REGEX | head -n 1
+}
+
 ch_con() {
   LD_LIBRARY_PATH=$SYSTEMLIB /system/toybox chcon -h u:object_r:system_file:s0 $1
   LD_LIBRARY_PATH=$SYSTEMLIB /system/bin/toybox chcon -h u:object_r:system_file:s0 $1
@@ -261,8 +271,23 @@ if [ -z "$BIN" ]; then
   COM=/tmp/XOSPAPPS/system
 fi
 
-cp -rf $COM/* /system/
-viperfx
+XAPPS=$(grep_prop ro.xosp.apps | cut -c-4)
+XEAPPS=false
+DEFAULT=true
+
+if [ "$XAPPS" = "true" ]; then XEAPPS=true; fi;
+
+if [ "$XEAPPS" = "$DEFAULT" ]; then
+
+  cp -rf $COM/* /system/
+  viperfx
+
+else
+
+  ui_print "Sorry but this package is only for S+ Reborn users!"
+  exit 1
+
+fi
 
 ui_print "- Post-installation script"
 rm /system/toybox
