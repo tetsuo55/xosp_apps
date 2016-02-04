@@ -8,9 +8,10 @@
  - How to build them?
  You don't need to do anything, the build environment will do that for you right after you start the compilation process for your device and it will automatically create a flashable zip to the out folder of your target device. 
 
-##NOTE
+##NOTES
 
-  - XOSPApps are made to be flashable on S+ Reborn ROM so i suggest you to don't flash them on other kind of ROM. 
+  - The XOSPApps package is only available for S+ Reborn users so do not try to flash them on other custom ROMs cause the flash processs will fail 
+  - For the Maintainers, once you got the build uploaded on the thread, DO NOT forget to mention also the fact to flash the XOSPApps right after the ROM otherwise the user will find his phone into a botloop 
 
 ##XPERIA Apps included in XOSPApps package:
 
@@ -31,3 +32,7 @@
   - Weather Widget
   
 
+##Credits
+
+  - Sony (For everything)
+  - Xperia Community for many stuff and also for the initial System dumps provided 
