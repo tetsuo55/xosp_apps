@@ -2,13 +2,12 @@
 #
 # Copyright (C) 2016 Xperia Open Source Project
 # XOSPAPPS Installer
-# Thanks to @chainfire
+# Thanks to @chainfire 
 # 
 #
 
 OUTFD=$2
 ZIP=$3
-
 SYSTEMLIB=/system/lib
 
 ui_print() {
@@ -55,7 +54,6 @@ ln_con() {
   ln -s $1 $2
   ch_con $2
 }
-
 
 viperfx() {
 cat /system/bin/toolbox > /system/toolbox
@@ -172,7 +170,6 @@ then
  # Add effect
  sed -i 's/^effects {/effects {\n  v4a_standard_fx {\n    library v4a_fx\n    uuid 41d3c987-e6cf-11e3-a88a-11aba5d5c51b\n  }/g' $VENDOR_CONFIG
  fi
-
 #!/sbin/sh
 OUTFD=$2
 ZIP=$3
@@ -181,6 +178,14 @@ echo -n -e "ui_print $1\n" > /proc/self/fd/$OUTFD
 echo -n -e "ui_print\n" > /proc/self/fd/$OUTFD
 sed -i '/deep_buffer {/,/}/d' /system/etc/audio_policy.conf
 
+}
+
+active() {
+if [ "$ACTIVE" = "false" ]; then
+    exit 1
+else
+    viperfx
+fi
 }
 
 set_perm() {
@@ -259,8 +264,45 @@ if [ -z "$BIN" ]; then
 fi
 
 
+XAPPS=$(grep_prop ro.xosp.apps | cut -c-4)
+ARCH=$(grep_prop ro.product.cpu.abi | cut -c-3)
+REL=$(grep_prop ro.reborn.release | cut -c-3)
+REV=$(grep_prop ro.reborn.revision | cut -c-9)
+
+XEAPPS=false
+DEFAULT=true
+DEFREL=RL3
+DEFREV=Revision2
+
+if [ "$XAPPS" = "true" ]; then XEAPPS=true; fi;
+
+if [ "$ARCH" = "arm" ]; then
+  ui_print "[OK] You're on x86 architecture"
+if [ "$XEAPPS" = "$DEFAULT" ]; then
+  ui_print "[OK] You're on XOSP" 
+    if [ "$REL" = "$DEFREL" ]; then
+      ui_print "[OK] You're on $DEFREL"
+        if [ "$REV" = "$DEFREV" ]; then
+          ui_print "[OK] You're on $DEFREV"
+          else 
+            ui_print "[FAIL] You're not on $DEFREV! Aborting..."
+            exit 1
+          fi
+        else 
+          ui_print "[FAIL] You're not on $DEFREL! Aborting..."
+          exit 1
+        fi
+else 
+  ui_print "[FAIL] You're not on XOSP! Aborting..."
+  exit 1
+fi
+else 
+  ui_print "[FAIL] You're not on a arm architecture! Aborting..."
+  exit 1
+fi
+
 if [ -z "$BIN" ]; then
-  ui_print "- Extracting files"
+  ui_print "[OK] Files Extracted!" 
 
   cd /tmp
   mkdir XOSPAPPS
@@ -269,27 +311,12 @@ if [ -z "$BIN" ]; then
   unzip -o "$ZIP"
   
   COM=/tmp/XOSPAPPS/system
+  cp -rf $COM/* /system/;
 fi
 
-XAPPS=$(grep_prop ro.xosp.apps | cut -c-4)
-XEAPPS=false
-DEFAULT=true
-
-if [ "$XAPPS" = "true" ]; then XEAPPS=true; fi;
-
-if [ "$XEAPPS" = "$DEFAULT" ]; then
-
-  cp -rf $COM/* /system/
-  viperfx
-
-else
-
-  ui_print "Sorry but this package is only for S+ Reborn users!"
-  exit 1
-
-fi
-
-ui_print "- Post-installation script"
+ui_print "[OK] XOSPApps Installed"
+ui_print "[OK] ViperFX correctly initialized"
+viperfx
 rm /system/toybox
 rm /system/toolbox
 
