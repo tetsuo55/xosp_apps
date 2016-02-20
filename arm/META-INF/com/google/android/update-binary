@@ -274,6 +274,19 @@ DEFAULT=true
 DEFREL=RL3
 DEFREV=Revision2
 
+ui_print "____  ___________    ___________________ "
+ui_print "\   \/  /\_____  \  /   _____/\______   \"
+ui_print " \     /  /   |   \ \_____  \  |     ___/"
+ui_print " /     \ /    |    \/        \ |    | "   
+ui_print "/___/\  \\_______  /_______  / |____| "   
+ui_print "      \_/        \/        \/          "  
+ui_print "   _____                       "
+ui_print "  /  _  \ ______ ______  ______"
+ui_print " /  /_\  \\____ \\____ \/  ___/"
+ui_print "/    |    \  |_> >  |_> >___ \ "
+ui_print "\____|__  /   __/|   __/____  >"
+ui_print "        \/|__|   |__|       \/ "
+
 if [ "$XAPPS" = "true" ]; then XEAPPS=true; fi;
 
 if [ "$ARCH" = "arm" ]; then
