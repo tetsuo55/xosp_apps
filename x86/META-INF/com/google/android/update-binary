@@ -271,8 +271,8 @@ REV=$(grep_prop ro.xosp.revision | cut -c-9)
 
 XEAPPS=false
 DEFAULT=true
-DEFREL=RL3
-DEFREV=Revision2
+DEFREL=RL4
+DEFREV=Revision1
 
 ui_print "____  ___________    ___________________ "
 ui_print "\   \/  /\_____  \  /   _____/\______   \"
