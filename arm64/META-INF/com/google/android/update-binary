@@ -265,7 +265,7 @@ fi
 
 
 XAPPS=$(grep_prop ro.xosp.apps | cut -c-4)
-ARCH=$(grep_prop ro.product.cpu.abilist | cut -c-19)
+ARCH=$(grep_prop ro.product.cpu.abi2 | cut -c-7)
 REL=$(grep_prop ro.xosp.release | cut -c-3)
 REV=$(grep_prop ro.xosp.revision | cut -c-9)
 
@@ -276,7 +276,7 @@ DEFREV=Revision1
 
 if [ "$XAPPS" = "true" ]; then XEAPPS=true; fi;
 
-if [ "$ARCH" = "armeabi-v7a,armeabi" ]; then
+if [ "$ARCH" = "armeabi" ]; then
   ui_print "[OK] You're on arm64 architecture"
 if [ "$XEAPPS" = "$DEFAULT" ]; then
   ui_print "[OK] You're on XOSP" 
