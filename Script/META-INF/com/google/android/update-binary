@@ -271,8 +271,8 @@ REV=$(grep_prop ro.xosp.revision | cut -c-9)
 
 XEAPPS=false
 DEFAULT=true
-DEFREL=RL4
-DEFREV=Revision2
+DEFREL=RL5
+DEFREV=Revision1
 
 if [ "$XAPPS" = "true" ]; then XEAPPS=true; fi;
 
