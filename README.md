@@ -19,17 +19,19 @@
   - Xperia Z5 Home app
   - Album App
   - PhotoEditor
+  - PhotoAnalyzer
   - Xperia Keyboard (aka textinput-tng)
-  - Music App (former WALKMAN)
-  - Video App
+  - Music (former WALKMAN)
+  - Video
   - SemCalendar
   - AudioRecorder (Material Version)
-  - ClockWidget
-  - SemcClock
-  - Sony's Sketch
+  - ClockWidgets
+  - Sketch
   - SmartConnect
   - WallpaperPicker (For Xperia Z5 custom wallpapers)
   - Weather App
+  - Wheater Widget
+  - Walkman Widget
   - Track ID
   
 
